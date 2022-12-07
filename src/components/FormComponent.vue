@@ -10,8 +10,8 @@
         <input type="text" class="ms-2" v-model="search.query" />
         <button class="btn btn-outline-light"><i class="mdi mdi-magnify"></i></button>
     </form>
-    <div>
-        <img src="" class="img-small img-fluid" />
+    <div v-for="gif in gifs">
+        <img :src="gif.images.downsized.url" class="img-small img-fluid selectable" @click="setUrlParam(gif.id)" />
     </div>
 
 </template>
@@ -55,6 +55,12 @@ export default {
                     logger.log(error)
                     Pop.error(error)
                 }
+            },
+            gifs: computed(() => AppState.giphyGifs),
+
+            setUrlParam(id) {
+                let foundGif = AppState.giphyGifs.find(g => g.id == id)
+                formData.url = foundGif.images.downsized.url
             }
         }
     }

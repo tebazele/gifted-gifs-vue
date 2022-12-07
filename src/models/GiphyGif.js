@@ -1,6 +1,7 @@
 export class GiphyGif {
     constructor(data) {
-        this.url = data.images.original.url
+        this.title = data.title
+        this.id = data.id
         this.images = data.images
     }
 }
